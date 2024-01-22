@@ -40,6 +40,7 @@ def differential(
                 for j in range(I):
                     if G[a, b] != 0 and g[i, j] != 0:
                         Q[a, i] += M[b, j] * c(G[a, b], g[i, j])
+    return Q
     
 def GA(
         G: torch.Tensor, 
@@ -103,7 +104,7 @@ f'''Graduate Assignment Algorithm:
             Q = differential(M[:-1, :-1], G, g, c)
             # M_{ai}^0 \leftarrow \exp(\beta Q_{ai})
             # Because in pygm.sinkhorn, it will perform exponential on all elements.
-            # To avoid exponential on the slack row & colmn, we perform log here to counteract it.
+            # To avoid exponential on the slack row & column, we perform log here to counteract it.
             M[:-1, :-1] = beta * Q
             M[:-1, -1] = torch.log(M[:-1, -1])
             M[-1, :-1] = torch.log(M[-1, :-1])

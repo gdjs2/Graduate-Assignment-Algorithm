@@ -2,8 +2,9 @@ import GA
 import torch
 from loguru import logger
 from rich.console import Console
+from numba import jit
 
-NODES_NUM = 100
+NODES_NUM = 10
 
 def c(x: torch.Tensor, y: torch.Tensor):
     return x * y
